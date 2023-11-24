@@ -1,18 +1,19 @@
 from flask import Flask, request, jsonify, abort
 from waitress import serve
-from functools import wraps  
+from functools import wraps
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import pandas as pd
-import pyodbc
 import uuid
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 app = Flask(__name__)
 
-# Configura tus claves API y proyectname 
+# Configura tus claves API y proyectname
 APIKEY = "db92efc69991"
 PROYECTNAME = "demo"
 
@@ -33,17 +34,17 @@ def check_credentials(func):
 
     return check_credentials_wrapper
 
-# Configura tu cadena de conexión para la base de datos pruebas_servicios
-conn_str = "DRIVER={SQL Server};SERVER=basededatos;DATABASE=pruebas_servicios;UID=usuario;contraseña"
-conn = pyodbc.connect(conn_str)
-cursor = conn.cursor()
+# Initialize Firebase
+cred = credentials.Certificate('D:/Roger/Desktop/temporales parcial/Servicio_Heart-attack-prediction/firebase.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 # Generar un ID único para cada transacción
 def generate_transaction_id():
     return str(uuid.uuid4())
 
 # Load data from CSV file
-archivo_csv = r'D:\Roger\Desktop\Brayan\datos.csv'
+archivo_csv = r'D:\Roger\Desktop\temporales parcial\Servicio_Heart-attack-prediction\datos.csv'
 data = pd.read_csv(archivo_csv)
 
 # Drop unnecessary columns
@@ -129,7 +130,7 @@ def incremental_train(model, criterion, optimizer, new_X, new_y):
     optimizer.step()
 
 # Endpoint `/predict` modificado
-@app.route('/predict', methods=['POST'])
+@app.route('/predict/', methods=['POST'])
 @check_credentials
 def predict():
     try:
@@ -169,15 +170,15 @@ def predict():
             prediction = model(formulario_tensor)
             probability = prediction.item()
 
-        # Generar un ID único para la transacción
+        # Generate a unique ID for the transaction
         transaction_id = generate_transaction_id()
 
-        # Insertar los resultados en la base de datos
-        cursor.execute("INSERT INTO Predictions (TransactionID, Probability, OtherInfo) VALUES (?, ?, ?)",
-                       transaction_id, probability, "RESULTADO")
-
-        # Confirmar la transacción en la base de datos
-        conn.commit()
+        # Insert results into Firebase
+        db.collection('Predictions').add({
+            'TransactionID': transaction_id,
+            'Probability': probability,
+            'OtherInfo': 'RESULTADO'
+        })
 
         # Entrenar el modelo con los nuevos datos
         new_X = torch.tensor(formulario_df, dtype=torch.float32)
@@ -185,7 +186,7 @@ def predict():
 
         incremental_train(model, criterion, optimizer, new_X, new_y)
 
-        # Devolver el ID de transacción en lugar de la probabilidad
+        # Return the transaction ID in the response
         return jsonify({'transaction_id': transaction_id})
 
     except Exception as e:
@@ -197,16 +198,17 @@ def predict():
 def obtener_prediccion_endpoint(transaction_id):
     try:
         # Consultar la información de la base de datos utilizando el transaction_id
-        cursor.execute("SELECT * FROM Predictions WHERE TransactionID=?", transaction_id)
-        result = cursor.fetchone()
+        result = db.collection('Predictions').where('TransactionID', '==', transaction_id).get()
 
-        if result:
-            # La información fue encontrada
-            transaction_id, probability, other_info = result
-            return jsonify({'transaction_id': transaction_id, 'probability': probability, 'other_info': other_info})
-        else:
-            # No se encontró información para el transaction_id dado
+        if not result:
             return jsonify({'error': 'No se encontró información para el ID de transacción proporcionado.'}), 404
+
+        data = result[0].to_dict()
+        transaction_id = data['TransactionID']
+        probability = data['Probability']
+        other_info = data['OtherInfo']
+
+        return jsonify({'transaction_id': transaction_id, 'probability': probability, 'other_info': other_info})
 
     except Exception as e:
         return jsonify({'error': str(e)})

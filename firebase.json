@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "glossy-calculus-323900",
+  "private_key_id": "02a6d1a6a14addb7eaf4d7ea6ed7c5da893015dd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQDKKepfGdwsNKPx\nNkSlwnI74tnh82slqSbhvHrOi47N7LzdWGnKAYnoUNwse7GPmtID4kxjsE9C7mMB\n8OgyOblQsLom/8eHhGLy+1H9QDhUBUgt0lEj9sxErp5R21vwLX7Q3V7J0cnb0Vty\ndFQEDtxQseUJ4DBxmyLpmbwgYGE3z9a1OaTw+0m4fQO+y0VVRcSCDh3U+kRdpoZS\n+MCGzaR9ZtXeG5M0vpdT1RGrsK9vCiu6OTBIlrer22YoTv+cRoXLp0ShFehlWBHM\n26fnR9LMLiymzkVMKmxXq88sdw1Pqim4EBIVTeegU9aG1MlSENVjkC2+Nw6Dalvo\n1xDFevv9AgMBAAECgf9iIw4XSurFFmuWZqpgtb3VsXhB8XP6vPOuoS1Zc6uZM/XA\nlLZo5RCBcDOf8A62Slpi/KZHBCDqRYjhrifDrkHTAQ6ia4f8KdOBw2c4K91avZLA\nq53PNKH0WERUA+KGQKbavVW6ou3O9hg/vSFo1uUzjMrRAHf4IoWhmrmg/eKQwBn2\nu0x8RCFXVWrxVs9rPqv48CnVMagKBmTqh67+YPLg6IpyMkwh4xsRT/tgm+V8HeSK\nXDlPr81O93qJN451pIibbGmcNdMVdvKNS3wTZZ8ol2DCU2lgvRgVN3J3kYIp6ia2\nAbW4B4fM78nCZUdbGrNgxoWzyApmLQnLTw6AMA0CgYEA5U6dBVtVEZc4gH/u0Ztb\nFGqBhSntWHCsvln8IYBuLx7i6j+4Pw6NoWY/ZhNP95P8xBOyx6FhVqTBDefUKE2L\nyr5JWjx2QKtfqmEXRXS/31Eav9xZqsqatFuDKvchwmzui+WIkVqL0T9hwqsf8oDE\nr9JbQnJlQTHqg2t5T22+/QcCgYEA4bJtE866HNkmHA0sXTC4f+Pqs4uaDYdhwqm9\nZiOlbekEFiXzrnxUnRE9vObAOXEHkh47bINvwvsIPk8m8LGSqy5qPClJXSX99Sa6\nAlzdOJAsWbdm9KHWSL0oTHfIU91d5NIES4xKSCssOuACenFf4YfMcJXqTWolzbCG\ng1+ogdsCgYAMO21U49Jd5ds1v51VwRvSsvvFxr7KgPg2D0bL4rX9/X/NTyjc9EHJ\n4lJvd4hEhLhvHT3kOE+g95j0zPEcVUanwg7XqXIFcR7hT9yV7+xsVT9ADNkbq0Ml\na9xLZnN+k6EGBXCLkHD08JSeddJ2dTgIyQflO4T7PVZtPEZ0Xj5Z8QKBgQCQ+yAM\nkEiHzYoojOHJv0lVhiA3U98S/7tx472xxgY3s26Xl6uQk3d7Kh8hoI0smQoG9/qu\nO0Ro2P8zn37hMQCJjBhcKx1gg84+U7E7YVIOSrbiruipDujq8u/XJz79eH8fRTXT\nHfx9nZYc/9c3tmqkIqrWS8cmEaDVH6dY7vL87wKBgEWekzeTybTe352+T/ZOEO5W\nhItkSVdpXKB45KauqRa9jkBMA9wKZfq67ltJRUCXphWVmPsvLq3iZALLNxXPI8EO\nCfV7CNZ9xx3HTueZhaOAyHWsXSMoZbf0o6qlBFdrTgFn1TM3AbgZDnzuiWYaWYZS\nEfpF9AVyRNYB6VsfHYB2\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-90wgf@glossy-calculus-323900.iam.gserviceaccount.com",
+  "client_id": "113894760970859528063",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-90wgf%40glossy-calculus-323900.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -38,22 +38,10 @@ Para ejecutar esta aplicación, debes asegurarte de tener todas las dependencias
 
 Luego, ejecutas el script Python y la aplicación estará disponible en http://127.0.0.1:5000/. Puedes hacer solicitudes a los endpoints /predict y /obtener_prediccion/<transaction_id> utilizando herramientas como cURL, Postman, o desde otro script Python.
 
-Recordar que para correr La aplicacion debe estar conectada a una base de datos local.
+Actualmente usa una base de datos Ubicada en Firebase.
 
-Query 
+[![Imagenes2.png](https://i.postimg.cc/cJCbjjZb/Imagenes2.png)](https://postimg.cc/67sc4M8r)
+[![Imagenes3.png](https://i.postimg.cc/2jZPrPvp/Imagenes3.png)](https://postimg.cc/5jfPmKnp)
+[![Imagenes4.png](https://i.postimg.cc/ZqQMhc5K/Imagenes4.png)](https://postimg.cc/yJFPm0Rw)
 
--- Crear la base de datos pruebas_servicios
-CREATE DATABASE pruebas_servicios;
-GO
-
--- Cambiar al contexto de la base de datos pruebas_servicios
-USE pruebas_servicios;
-GO
-
--- Crear una tabla para almacenar las predicciones
-CREATE TABLE Predictions (
-    TransactionID NVARCHAR(255) PRIMARY KEY,
-    Probability FLOAT,
-    OtherInfo NVARCHAR(255)
-);
-GO
+ 
