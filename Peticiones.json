@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "87f7e40b-7542-4ddd-91fd-fe925399fb4a",
+		"name": "Brayan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16050468"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/obtener_prediccion/c442cf82-6051-4d80-a05e-f45f5e662536",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "APIKEY",
+						"value": "db92efc69991"
+					},
+					{
+						"key": "PROYECTNAME",
+						"value": "demo"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/obtener_prediccion/c442cf82-6051-4d80-a05e-f45f5e662536",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"obtener_prediccion",
+						"c442cf82-6051-4d80-a05e-f45f5e662536"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/predict",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "APIKEY",
+						"value": "db92efc69991",
+						"type": "text"
+					},
+					{
+						"key": "PROYECTNAME",
+						"value": "demo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Age\": 30,\r\n  \"Sex_Male\": 1,\r\n  \"Cholesterol\": 190,\r\n  \"Systolic Pressure\": 120,\r\n  \"Diastolic Pressure\": 80,\r\n  \"Heart Rate\": 120,\r\n  \"Diabetes_Si\": 0,\r\n  \"Family History_Si\": 0,\r\n  \"Smoking_Si\": 1,\r\n  \"Obesity_Si\": 0,\r\n  \"Alcohol Consumption_Moderate\": 1,\r\n  \"Exercise Hours Per Week\": 3,\r\n  \"Diet_Balanced\": 1,\r\n  \"Previous Heart Problems_Si\": 0,\r\n  \"Medication Use_No\": 1,\r\n  \"Stress Level_Low\": 1,\r\n  \"Sedentary Hours Per Day\": 8,\r\n  \"Income\": 50000,\r\n  \"BMI\": 10,\r\n  \"Triglycerides\": 150,\r\n  \"Physical Activity Days Per Week\": 4,\r\n  \"Sleep Hours Per Day\": 7,\r\n  \"Country_Your Country\": 1,\r\n  \"Continent_Your Continent\": 1,\r\n  \"Hemisphere_North\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predict",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
