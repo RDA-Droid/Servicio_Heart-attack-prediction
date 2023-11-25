@@ -3,6 +3,7 @@ from functools import wraps
 from modelos.modelo import SimpleNN, incremental_train
 from datos import load_data, preprocess_data
 from firebase import db, generate_transaction_id
+from firebase.firebase import register_user, login_user, auth
 import torch
 import pandas as pd
 
@@ -10,6 +11,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 servicio_app = Blueprint('servicio', __name__)
+
+auth_app = Blueprint('auth_app', __name__)
 
 # Configura tus claves API y proyectname
 APIKEY = "db92efc69991"
@@ -165,6 +168,51 @@ def obtener_prediccion_endpoint(transaction_id):
         other_info = data['OtherInfo']
 
         return jsonify({'transaction_id': transaction_id, 'probability': probability, 'other_info': other_info})
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
+@auth_app.route('/register', methods=['POST'])
+def register():
+    try:
+        data = request.json
+        email = data.get('email')
+        password = data.get('password')
+
+        if not email or not password:
+            abort(400, "Por favor, proporciona un correo electrónico y una contraseña.")
+
+        user_id = register_user(email, password)
+        return jsonify({'user_id': user_id})
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+@auth_app.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.json
+        email = data.get('email')
+        password = data.get('password')
+
+        if not email or not password:
+            abort(400, "Por favor, proporciona un correo electrónico y una contraseña.")
+
+        user_id = login_user(email, password)
+        return jsonify({'user_id': user_id})
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
+@auth_app.route('/protected', methods=['GET'])
+def protected():
+    try:
+        id_token = request.headers.get('Authorization')
+        decoded_token = auth.verify_id_token(id_token)
+        user_id = decoded_token['uid']
+        return jsonify({'user_id': user_id, 'message': 'Esta ruta está protegida.'})
 
     except Exception as e:
         return jsonify({'error': str(e)})
