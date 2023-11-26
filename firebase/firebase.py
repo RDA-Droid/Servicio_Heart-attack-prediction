@@ -5,17 +5,17 @@ import json
 import jwt
 from datetime import datetime, timedelta
 
-cred = credentials.Certificate('C:/Users/USER/Desktop/brayan-project/Servicio_Heart-attack-prediction/firebase.json')
+cred = credentials.Certificate('Servicio_Heart-attack-prediction/firebase.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 SECRET_KEY = 'tu_clave_secreta'
-USERS_FILE = 'C:/Users/USER/Desktop/brayan-project/Servicio_Heart-attack-prediction/users.json'
+USERS_FILE = 'Servicio_Heart-attack-prediction/users.json'
 
 def generate_transaction_id():
     return str(uuid.uuid4())
 
-def register_user(email, password):
+def register_user(email, password, rol):
     try:
         with open(USERS_FILE, 'r') as f:
             users_data = json.load(f)
@@ -26,7 +26,7 @@ def register_user(email, password):
                 raise Exception('El usuario ya está registrado.')
 
         # Agregar el nuevo usuario
-        new_user = {'email': email, 'password': password}
+        new_user = {'email': email, 'password': password, 'rol': rol}
         users_data['users'].append(new_user)
 
         with open(USERS_FILE, 'w') as f:
@@ -48,6 +48,7 @@ def login_user(email, password):
                 # Generar un token JWT con información del usuario
                 payload = {
                     'email': user['email'],
+                    'rol': user['rol'],
                     'exp': datetime.utcnow() + timedelta(days=1)  # Token válido por 1 día
                 }
                 token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')

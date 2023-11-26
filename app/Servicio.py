@@ -36,7 +36,7 @@ def check_credentials(func):
     return check_credentials_wrapper
 
 # Load and preprocess data
-data = load_data(r'C:/Users/USER/Desktop/brayan-project/Servicio_Heart-attack-prediction/datos.csv')
+data = load_data(r'Servicio_Heart-attack-prediction/datos.csv')
 columns_to_drop = ['Patient ID']
 data = data.drop(columns=columns_to_drop, errors='ignore')
 
@@ -90,7 +90,7 @@ for epoch in range(epochs):
     optimizer.step()
 
 # Endpoint `/predict` modificado
-@servicio_app.route('/predict/', methods=['POST'])
+@servicio_app.route('/predict', methods=['POST'])
 @check_credentials
 def predict():
     try:
@@ -176,14 +176,20 @@ def obtener_prediccion_endpoint(transaction_id):
 @auth_app.route('/register', methods=['POST'])
 def register():
     try:
+        mi_diccionario = {}
+
+        # Agregar elementos al diccionario
+        mi_diccionario[1] = 'Admin'
+        mi_diccionario[2] = 'Comun'
+        
         data = request.json
         email = data.get('email')
         password = data.get('password')
-
+        rol = data.get('rol')
         if not email or not password:
             abort(400, "Por favor, proporciona un correo electrónico y una contraseña.")
 
-        user_id = register_user(email, password)
+        user_id = register_user(email, password, mi_diccionario[rol])
         return jsonify({'user_id': user_id})
 
     except Exception as e:

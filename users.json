@@ -2,7 +2,13 @@
   "users": [
     {
       "email": "jesus.1344@hotmail.com",
-      "password": "jesus225"
+      "password": "jesus225",
+      "rol": "Admin"
+    },
+    {
+      "email": "jesus.1244@hotmail.com",
+      "password": "jesus225",
+      "rol": "Comun"
     }
   ]
 }
